@@ -70,6 +70,31 @@ setup(\n\
         self.write_content(os.path.join(self.project_name, "tests", 'README.md'),
                            "#Package integration and unit tests.")
         self.write_content(os.path.join(self.project_name, "docs", 'README.md'), "#Package reference documentation.")
+        if self.configs["add_sample_data"]:
+            self.write_content(os.path.join(self.project_name, self.library_name, 'hello.py'),
+                               self.get_banner() + self.get_sample_hello())
+            self.write_content(os.path.join(self.project_name, "tests", 'test_hello.py'),
+                               self.get_banner() + self.get_sample_test())
+
+    def get_sample_hello(self):
+        content = "class Hello:\n" \
+                  "    def __init__(self, name):\n" \
+                  "        self.name = name\n" \
+                  "    \n" \
+                  "    def say_hello(self):\n" \
+                  "        return f'Hello {self.name}'\n" \
+                  "    "
+        return content
+
+    def get_sample_test(self):
+        content = f"from {self.library_name}.hello import Hello \n\
+\n\
+\n\
+def test_say_hello():\n\
+    h = Hello('{self.configs['library_author']}')\n\
+    assert h.say_hello() == 'Hello {self.configs['library_author']}'\n\
+"
+        return content
 
     def clean(self):
         """

@@ -8,5 +8,6 @@
   "library_author_email": "library_author_email",
   "library_author_url": "library_author_url",
   "library_license": "library_license",
-  "library_license_url": "library_license_url"
+  "library_license_url": "library_license_url",
+  "add_sample_data": true
 }
